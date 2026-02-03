@@ -1,0 +1,188 @@
+:root{
+  --bg:#0b0f19;
+  --card:#121a2a;
+  --text:#e9eefc;
+  --muted:#a9b3d1;
+  --border:rgba(255,255,255,.10);
+  --primary:#4f7cff;
+  --danger:#ff5a66;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius:18px;
+}
+
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: linear-gradient(180deg, #070a12 0%, var(--bg) 100%);
+  color:var(--text);
+}
+
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 14px 14px 10px;
+  background: rgba(11,15,25,.72);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.title h1{margin:0;font-size:22px;letter-spacing:.2px;}
+.title p{margin:6px 0 0;color:var(--muted);font-size:13px;}
+
+.screen{
+  padding: 12px 12px 90px; /* leave space for tab bar */
+  max-width: 520px;
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+}
+
+.card{
+  background: rgba(18,26,42,.88);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.h2{font-weight:900;font-size:16px;margin-bottom:4px;}
+.muted{color:var(--muted);font-size:13px;}
+
+.row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.label{
+  display:block;
+  margin: 12px 0 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.input{
+  width:100%;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border:1px solid var(--border);
+  background: rgba(0,0,0,.22);
+  color: var(--text);
+  outline:none;
+  font-size: 16px; /* important on iPhone (prevents zoom) */
+}
+.input:focus{border-color: rgba(79,124,255,.55);}
+
+.grid2{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn{
+  border:0;
+  border-radius: 14px;
+  padding: 12px 12px;
+  font-weight: 900;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100%;
+}
+.btn-primary{background: var(--primary); color:white;}
+.btn-secondary{background: rgba(255,255,255,.08); color: var(--text); border:1px solid var(--border);}
+
+.ctaRow{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
+  margin-top: 12px;
+}
+
+.chip{
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.chip.danger{border-color: rgba(255,90,102,.35); color: #ffd0d4;}
+
+.quick{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top: 12px;
+}
+
+.list{display:grid; gap:10px; margin-top: 10px;}
+.item{
+  border:1px solid var(--border);
+  background: rgba(0,0,0,.18);
+  border-radius: 16px;
+  padding: 12px;
+}
+.itemTop{display:flex; justify-content:space-between; gap:10px; align-items:baseline;}
+.itemTitle{font-weight: 950;}
+.itemMeta{color: var(--muted); font-size: 13px;}
+.pill{
+  display:inline-block;
+  margin-top:8px;
+  padding:6px 10px;
+  border-radius: 999px;
+  background: rgba(79,124,255,.14);
+  border:1px solid rgba(79,124,255,.25);
+  color:#cfe0ff;
+  font-size: 13px;
+  font-weight: 800;
+}
+.note{margin-top:6px; color: var(--muted); font-size: 13px;}
+
+.tabbar{
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(11,15,25,.78);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  z-index: 10;
+}
+
+.tabbtn{
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.06);
+  border-radius: 16px;
+  padding: 10px 6px;
+  color: var(--text);
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+}
+.tabbtn.active{
+  border-color: rgba(79,124,255,.55);
+  background: rgba(79,124,255,.12);
+}
+.icon{font-size:18px; line-height: 1;}
+.txt{font-size: 12px; font-weight: 900;}
+
+.fileBtn{display:flex; align-items:center; justify-content:center;}
+canvas{
+  width:100%;
+  height:auto;
+  margin-top: 12px;
+  border-radius: 14px;
+  border:1px solid var(--border);
+  background: rgba(0,0,0,.18);
+}
