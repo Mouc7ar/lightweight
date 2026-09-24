@@ -44,6 +44,8 @@ function startOfWeekISO(d = new Date()) {
   return local.toISOString().slice(0, 10);
 }
 
+
+
 /* ---------------- Utilities ---------------- */
 function safe(s){ return (s || "").replaceAll("<","&lt;").replaceAll(">","&gt;"); }
 function norm(s){ return (s || "").trim().toLowerCase(); }
@@ -64,6 +66,7 @@ function toast(msg, ms = 1200) {
 }
 function vibrate(ms = 15) {
   if (navigator.vibrate) navigator.vibrate(ms);
+  
 }
 function shake(el){
   if (!el) return;
@@ -188,7 +191,7 @@ function sparkPoints(exName, n = 18) {
   return tail.map(s => epley1RM(s.weight, s.reps)).filter(v => v > 0);
 }
 
-/* ---------------- Drawing (no colors specified by user; keep neutral) ---------------- */
+/* ---------------- Drawing ---------------- */
 function clearCanvas(ctx, canvas) {
   ctx.clearRect(0,0,canvas.width, canvas.height);
 }
@@ -196,6 +199,10 @@ function clearCanvas(ctx, canvas) {
 function drawLineChart(ctx, canvas, values) {
   clearCanvas(ctx, canvas);
   if (!values || values.length < 2) return false;
+
+  const styles = getComputedStyle(document.documentElement);
+  const accent = styles.getPropertyValue("--accent").trim() || "#ffffff";
+  const grid = "rgba(255,255,255,.16)";
 
   const w = canvas.width, h = canvas.height;
   const pad = 18;
@@ -209,6 +216,7 @@ function drawLineChart(ctx, canvas, values) {
 
   // axes
   ctx.globalAlpha = 0.35;
+  ctx.strokeStyle = grid;
   ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.moveTo(pad, pad);
@@ -218,6 +226,7 @@ function drawLineChart(ctx, canvas, values) {
   ctx.globalAlpha = 1;
 
   // line
+  ctx.strokeStyle = accent;
   ctx.lineWidth = 2;
   ctx.beginPath();
   values.forEach((v,i) => {
@@ -229,6 +238,7 @@ function drawLineChart(ctx, canvas, values) {
 
   // end label
   ctx.font = "12px system-ui";
+  ctx.fillStyle = accent;
   ctx.globalAlpha = 0.8;
   ctx.fillText(`~${Math.round(values.at(-1))}`, pad, 14);
   ctx.globalAlpha = 1;
@@ -250,6 +260,7 @@ function drawSparkline(canvas, values) {
 
   const w = canvas.width, h = canvas.height;
   const pad = 6;
+  const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#ffffff";
 
   const minY = Math.min(...values);
   const maxY = Math.max(...values);
@@ -259,6 +270,7 @@ function drawSparkline(canvas, values) {
   const y = (v) => (h - pad) - ((v - minY) / range) * (h - pad*2);
 
   ctx.globalAlpha = 0.45;
+  ctx.strokeStyle = "rgba(255,255,255,.14)";
   ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.moveTo(pad, h - pad);
@@ -266,6 +278,7 @@ function drawSparkline(canvas, values) {
   ctx.stroke();
   ctx.globalAlpha = 1;
 
+  ctx.strokeStyle = accent;
   ctx.lineWidth = 2;
   ctx.beginPath();
   values.forEach((v,i) => {
